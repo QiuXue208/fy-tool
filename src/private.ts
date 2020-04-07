@@ -1,2 +1,2 @@
-export const appid = "20200407000413624";
-export const appsecret = "yDkKpI5wuGhHyCgNrV0w";
+export const appid = "你的appid";
+export const appsecret = "你的appsecret";
