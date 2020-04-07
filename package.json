@@ -7,9 +7,11 @@
     "start": "ts-node-dev main.ts"
   },
   "dependencies": {
-    "commander": "^5.0.0"
+    "commander": "^5.0.0",
+    "md5": "^2.2.1"
   },
   "devDependencies": {
+    "@types/md5": "^2.1.33",
     "@types/node": "^13.11.0"
   }
 }
