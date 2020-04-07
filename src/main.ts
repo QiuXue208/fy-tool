@@ -2,11 +2,12 @@ import * as https from "https";
 import * as querystring from "querystring";
 import * as md5 from "md5";
 import { appid, appsecret } from "./private";
+import { errorMap } from "./constant";
 
 export const translate = (word) => {
   const q = word;
   const salt = Math.random();
-  const sign = md5(appid + word + salt + appsecret);
+  const sign = md5(appid + 1 + word + salt + appsecret);
 
   const query = querystring.stringify({
     q,
@@ -24,14 +25,40 @@ export const translate = (word) => {
     method: "GET",
   };
 
-  const req = https.request(options, (res) => {
-    res.on("data", (d) => {
-      process.stdout.write(d);
-    });
+  const request = https.request(options, (response) => {
+    type BaiduResult = {
+      // error_code可能为字符串类型或者没有
+      error_code?: string;
+      error_msg?: string;
+      from: string;
+      to: string;
+      trans_result: {
+        src: string;
+        dst: string;
+      }[];
+    };
+    let chunks = [];
+    response
+      .on("data", (chunk) => {
+        chunks.push(chunk);
+      })
+      .on("end", () => {
+        const str = Buffer.concat(chunks).toString();
+        const object: BaiduResult = JSON.parse(str);
+        if (object.error_code) {
+          console.error(errorMap[object.error_code] || object.error_msg);
+          process.exit(1);
+        } else {
+          object.trans_result.map((item) => {
+            console.log(`- ${item.dst}`);
+            process.exit(0);
+          });
+        }
+      });
   });
 
-  req.on("error", (e) => {
+  request.on("error", (e) => {
     console.error(e);
   });
-  req.end();
+  request.end();
 };
