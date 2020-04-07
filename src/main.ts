@@ -1,14 +1,14 @@
 import * as https from "https";
 import * as querystring from "querystring";
-import * as md5 from "md5";
+const md5 = require("md5");
 import { appid, appsecret } from "./private";
 import { errorMap } from "./constant";
 
-export const translate = (word) => {
+export const translate = (word: string) => {
   const reg = /^[a-zA-Z]\w$/;
 
-  const from = reg.test(word) ? "en" : "zh";
-  const to = reg.test(word) ? "zh" : "en";
+  const from = reg.test(word[0]) ? "en" : "zh";
+  const to = reg.test(word[0]) ? "zh" : "en";
   const q = word;
   const salt = Math.random();
   const sign = md5(appid + word + salt + appsecret);
@@ -41,9 +41,9 @@ export const translate = (word) => {
         dst: string;
       }[];
     };
-    let chunks = [];
+    let chunks: Buffer[] = [];
     response
-      .on("data", (chunk) => {
+      .on("data", (chunk: Buffer) => {
         chunks.push(chunk);
       })
       .on("end", () => {

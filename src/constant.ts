@@ -1,4 +1,7 @@
-export const errorMap = {
+type ErrorMap = {
+  [k: string]: string;
+};
+export const errorMap: ErrorMap = {
   "52001": "请求超时",
   "52002": "系统错误",
   "52003": "未授权用户",
