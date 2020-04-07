@@ -1,0 +1,15 @@
+{
+  "name": "fy-tool",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node-dev main.ts"
+  },
+  "dependencies": {
+    "commander": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0"
+  }
+}
