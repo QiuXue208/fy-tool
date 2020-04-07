@@ -5,14 +5,18 @@ import { appid, appsecret } from "./private";
 import { errorMap } from "./constant";
 
 export const translate = (word) => {
+  const reg = /^[a-zA-Z]\w$/;
+
+  const from = reg.test(word) ? "en" : "zh";
+  const to = reg.test(word) ? "zh" : "en";
   const q = word;
   const salt = Math.random();
-  const sign = md5(appid + 1 + word + salt + appsecret);
+  const sign = md5(appid + word + salt + appsecret);
 
   const query = querystring.stringify({
     q,
-    from: "en",
-    to: "zh",
+    from,
+    to,
     salt,
     appid,
     sign,
