@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as commander from "commander";
 const pkg = require("../package.json");
 const program = new commander.Command();

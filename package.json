@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "fy": "src/cli.ts"
+  },
+  "files": [
+    "dist/**/**.js"
+  ],
   "scripts": {
-    "start": "ts-node-dev main.ts"
+    "start": "ts-node-dev src/main.ts"
   },
   "dependencies": {
     "commander": "^5.0.0",
