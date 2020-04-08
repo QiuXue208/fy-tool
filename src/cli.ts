@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import * as commander from "commander";
 const pkg = require("../package.json");
-const program = new commander.Command();
+const { program } = require("commander");
 import { translate } from "./main";
 
 program
@@ -9,7 +8,7 @@ program
   .name("fy")
   .usage("<word>")
   .arguments("<word>")
-  .action(function (word) {
+  .action(function (word: string) {
     translate(word);
   });
 

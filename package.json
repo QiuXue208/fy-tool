@@ -1,13 +1,13 @@
 {
   "name": "fy-tool",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "main": "index.js",
   "license": "MIT",
   "bin": {
     "fy": "src/cli.ts"
   },
   "files": [
-    "dist/**/**.js"
+    "dist/*.js"
   ],
   "scripts": {
     "start": "ts-node-dev src/main.ts"
